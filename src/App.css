@@ -1,0 +1,17 @@
+#root {
+  --cor-primaria: #007bff; /* Variável global */
+  --cor-secundaria: #6c757d; /* Variável global */
+  --primary: #e20000; /* Variável global */
+  --white: #ffffff; /* Variável global */
+  --accent: #bae8e8;
+  /* --espacamento-padrao: 10px; */
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  box-sizing: border-box;
+}

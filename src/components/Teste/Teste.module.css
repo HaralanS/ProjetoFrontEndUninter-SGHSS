@@ -1,0 +1,9 @@
+.container {
+  background-color: var(--cor-secundaria);
+  padding: 20px;
+}
+
+.title {
+  color: var(--cor-primaria);
+  font-size: 24px;
+}

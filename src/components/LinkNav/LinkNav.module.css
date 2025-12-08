@@ -1,0 +1,21 @@
+.linkNavModule{
+    font-size: 1rem;
+    line-height: 20px;
+    padding: 0 8px;
+    color: var(--white);
+    text-decoration: none;
+}
+
+.linkNavModule:hover {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+@media (max-width: 744px) {
+    .linkNavModule {
+        font-size: 1.5rem;
+    text-decoration: none;
+    }
+}
+
+

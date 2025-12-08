@@ -1,0 +1,37 @@
+export const usuarios = [
+    {
+        id: "1",
+        nome: "Alice Johnson",
+        email: "alice.johnson@example.com",
+        senha: "alice123",
+        role: "admin"
+    },
+    {
+        id: "2",
+        nome: "Bob Smith",
+        email: "bob.smith@example.com",
+        senha: "bob123",
+        role: "profissional"
+    },
+    {
+        id: "3",
+        nome: "Jack Sparrow",
+        email: "jack.sparrow@example.com",
+        senha: "jack123",
+        role: "paciente"
+    },
+    {
+        id: "4",
+        nome: "John Connor",
+        email: "john.connor@example.com",
+        senha: "john123",
+        role: "paciente"
+    },
+    {
+        id: "5",
+        nome: "Emmett Lathrop Brown",
+        email: "emmett.brown@example.com",
+        senha: "emmett123",
+        role: "profissional"
+    }
+]

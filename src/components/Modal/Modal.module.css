@@ -1,0 +1,52 @@
+.modalExternal {
+    position: fixed;
+    background-color: rgba(107, 107, 107, 0.464);
+    height: 100vh;
+    top: 0;
+    left: 0;
+    width: 100vw;
+}
+
+.modalContainer {
+    margin: auto;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--white);
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    padding: 32px;
+    border-radius: 12px;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.modalContainer p {
+    text-align: center;
+}
+
+
+/* .modalContainer button {
+    height: 36px;
+    background-color: var(--accent);
+    color: var(--white);
+    border-radius: 13px;
+    border: none;
+    padding: 0 16px;
+    cursor: pointer;
+} */
+
+@keyframes rotation {
+    0% {transform: rotate(0);}
+    50% {transform: rotate(180deg);}
+    100% {transform: rotate(360deg);}
+}
+
+@media(max-width: 744px){
+    .modalContainer {
+        width: 200px;
+    }
+}

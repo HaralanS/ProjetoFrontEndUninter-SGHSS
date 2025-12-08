@@ -1,0 +1,11 @@
+.anchorAtom{
+    color: var(--white);
+    line-height: 20px;
+    font-size: 16px;
+    padding: 6px 12px;
+    text-decoration: none;
+}
+
+.anchorAtom:hover {
+    color: var(--accent);
+}
