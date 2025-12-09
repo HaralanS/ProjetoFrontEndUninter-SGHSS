@@ -3,10 +3,13 @@ import { useState } from 'react'
 import styles from './NavBarAdmin.module.css'
 import LinkNav from '../LinkNav/LinkNav';
 
+// funcao de logout, remove os dados do usuario do localStorage
 const logout = () => {
     localStorage.removeItem("@vidaplus/dadosUsuario");
 }
 
+
+// componente de barra de navegação para o admin com menu hamburguer
 export default function NavBarAdmin() {
     const [burger, setBurger] = useState(false)
 

@@ -8,12 +8,15 @@ import styles from "../components/CardConsulta/CardConsulta.module.css"
 import Modal from '../components/Modal/Modal.jsx';
 import { Button } from '@mui/material';
 
+// funcao pra buscar o profissional pelo id relacionado na consulta
 function buscaProfissional(profissionalId) {
     return profissionais.find((profissional) => profissional.id === profissionalId);
 }
 
+// pagina de consultas do usuario
 export default function Consultas() {
 
+    // estado inicial da lista de horarios disponiveis
     const timeListObjects = [
         {time: "08:00", available: true},
         {time: "08:30", available: true},
@@ -43,32 +46,24 @@ export default function Consultas() {
     const [addMode, setAddMode] = useState(false)
     const [consultasList, setConsultasList] = useState(consultas)
 
+    // pegando o usuario logado pelo local storage e procurando ele na lista de usuarios
     const userLS = localStorage.getItem("@vidaplus/dadosUsuario")
     const userID = JSON.parse(userLS).id;
     const user = usuarios.find((u) => u.id === userID);
 
+    // funcao pra checar a data escolhida e atualizar a lista de horarios disponiveis
+    // de acordo com a agenda do profissional selecionado
     function checkDate(e) {
         console.log("Data do e: " + e.target.value)
 
         const doutor = profissionais.find((profissional) => profissional.id === doctorSelected);
 
-        // const agendaDoutor = doutor.agenda.filter((idCConsulta) => {
-        //     const consulta = consultas.find((c) => c.id === idCConsulta);
-        //     const dataString = consulta.data;
-        //     const data = dataString.split("T");
-        //     if(data[0] === e.target.value) {
-        //         return dataString;
-        //     }
-        // })
         const agendaDoutor = doutor.agenda.filter((dataString) => {
             const data = dataString.split("T");
             if(data[0] === e.target.value) {
                 return dataString;
             }
         })
-
-        // console.log("Agenda do doutor na data escolhida (strings): ")
-        // console.log(agendaDoutor);
 
         const novaAgenda = timeListObjects.map((timeObj) => {
             const timeString = timeObj.time;
@@ -82,11 +77,14 @@ export default function Consultas() {
 
         setTimeList(novaAgenda);
 
+        // log pra controle e teste
         console.log("Agenda do doutor na data escolhida: ")
         console.log(timeList);
         setDateChosen(true);
     }
 
+    // funcao pra cadastrar a nova consulta tanto na lista de consultas
+    // quanto na agenda do profissional selecionado
     function cadastraConsulta() {
         const dateInput = document.getElementById("datePicker").value;
         const timeInput = document.getElementById("selectTime").value;
@@ -121,6 +119,7 @@ export default function Consultas() {
             <h1>Consultas Page</h1>
             <Button variant="contained" onClick={() => setAddMode(!addMode)}>{addMode ? 'Cancelar' : 'Agendar Nova Consulta'}</Button>
 
+            {/* usei um ternario pra mostrar o formulario de cadastro ou a lista de consultas */}
             {addMode ? (
                 <div className={styles.divCadastroConsulta}>
                     <select name="selectDoctor" id="selectDoctor" onChange={(e) => setDoctorSelected(e.target.value)}>
@@ -131,15 +130,14 @@ export default function Consultas() {
                     <input type="date" name="datePicker" id="datePicker" min={new Date().toISOString().split("T")[0]} onChange={checkDate}/>
                     <select name="selectTime" id="selectTime" disabled={!dateChosen}>
                         <option value="">Selecione um opção</option>
+                        {/* monto o select conforme a disponibilidade de horaios no dia especifico escolhido */}
                         {timeList.map((timeObj) => 
                             (
                                 <option style={{backgroundColor: timeObj.available ? "white" : "lightgray"}} disabled={!timeObj.available}
                                     key={timeObj.time} value={timeObj.time}>{timeObj.time}</option>
 
                             )
-                        )}
-
-                        
+                        )}                        
                     </select>
                     <Button variant="contained" onClick={cadastraConsulta}>Cadastrar</Button>
                 </div>
@@ -148,6 +146,8 @@ export default function Consultas() {
                 <div className={styles.cardContainer}>
                     {consultasList.map((consulta) => consulta.pacienteId === user.id && (
 
+                        // exibindo o card de consulta apenas se a consulta for do usuario logado
+                        // e passando o profissional relacionado pra exibir os dados no card e setState do modal
                         <CardConsulta
                             key={consulta.id}
                             consulta={consulta}
@@ -159,16 +159,10 @@ export default function Consultas() {
                 </div>
             )}            
 
+            {/* modal aparece conforme o estado modalOn */}
             {modalOn && (
                 <Modal message="Consulta Remota" loading={false} closeModal={setModalOn} />
             )}
-            {/* {modalOn && (
-                <div className={styles.modal}>
-                    <div className={styles.modalContent}>
-                        <button onClick={() => setModalOn(false)}>Fechar</button>
-                    </div>
-                </div>
-            )} */}
         </div>
     )
 }

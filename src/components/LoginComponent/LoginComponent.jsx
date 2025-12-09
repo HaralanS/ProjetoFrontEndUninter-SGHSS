@@ -1,19 +1,21 @@
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-// import usuarios from '../data/usuarios.json';
 import {usuarios} from '../../data/usuarios.js';
 import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
 import styles from './LoginComponent.module.css';
 
+// componente principal da pagina de login
 export default function LoginComponent() {
     const navigate = useNavigate();
     const { register, handleSubmit, formState: { errors } } = useForm();
 
 
+    // funcao que eh usada no submit do formulario de login
     const onSubmit = async (data) => {
         try {
-            // const usuariosList = JSON.parse(usuarios);
+
+            // valida se usuario existe e se a senha esta correta
             const usuariosList = usuarios;
             console.log(usuariosList);
             const user = usuariosList.find((user) => user.email === data.email && user.senha === data.password);
@@ -29,8 +31,10 @@ export default function LoginComponent() {
                 role: user.role,
             };
 
+            // armazena os dados do usuario no localStorage
             localStorage.setItem('@vidaplus/dadosUsuario', JSON.stringify(dadosUsuario));
 
+            // redireciona o usuario para a pagina correta com base no seu papel
             setTimeout(() => {
                 if (user.role === 'admin') {
                     navigate('/admin');
@@ -46,8 +50,9 @@ export default function LoginComponent() {
                 }
                 console.log('Login bem-sucedido para usuário:', user.email);
             }, 100);
-            // navigate('/logged/user');
+            
         } catch (error) {
+            // trata erros durante o processo de login
             if (error instanceof Error) {
                 console.error('Erro ao fazer login:', error.message);
             } else {
@@ -56,6 +61,7 @@ export default function LoginComponent() {
         }
     };
 
+    // formulario de login usando react-hook-form
     return (
         <main className={styles.loginContainer}>
             <form onSubmit={handleSubmit(onSubmit)} className={styles.formContainer}>

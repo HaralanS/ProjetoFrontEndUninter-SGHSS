@@ -3,9 +3,8 @@ import styles from './Modal.module.css'
 import  YoutubeIFrame  from '../YoutubeIFrame/YoutubeIFrame'
 
 
-
+// modal que simula uma consulta remota com video do youtube
 export default function Modal({message, closeModal}) {
-
 
     return(
         <>
@@ -13,7 +12,7 @@ export default function Modal({message, closeModal}) {
                 <div className={styles.modalContainer}>
                     
                     <p>{message}</p>
-                    {/* <YoutubeIFrame embedId="dQw4w9WgXcQ" /> */}
+                    {/* iframe do youtube pra simular stream de consulta */}
                     <YoutubeIFrame embedId="D8CLV-MRH0k" />
                     <Button variant="contained" onClick={() => closeModal(false)}>Fechar</Button>
 

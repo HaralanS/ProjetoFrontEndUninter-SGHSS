@@ -2,10 +2,8 @@
 import { Link } from 'react-router-dom';
 import styles from './Header.module.css'
 
-// type HeaderProps = {
-//     children: React.ReactNode;
-// }
 
+// header padrao que recebe um componte nav como chil;dren nos layouts
 export default function Header({children}){
     return (<>
         <header className={styles.topo}>

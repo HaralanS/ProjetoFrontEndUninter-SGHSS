@@ -1,5 +1,6 @@
 import { Navigate, Outlet } from "react-router-dom"
 
+// rota privada para filtrar os acessos de funcionario
 export function PrivateRouteEmployee() {
   const dadosUsuario = localStorage.getItem("@vidaplus/dadosUsuario")
 

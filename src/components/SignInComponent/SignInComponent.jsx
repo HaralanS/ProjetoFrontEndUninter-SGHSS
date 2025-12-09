@@ -7,6 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Button, TextField } from '@mui/material';
 import styles from './SignInComponent.module.css';
 
+// schema com yup pra ajudar na validacao do formulario
 const schema = yup.object().shape({
     name: yup.string().required('Nome é obrigatório'),
     email: yup.string().email('Email inválido').required('Email é obrigatório'),
@@ -16,17 +17,18 @@ const schema = yup.object().shape({
         .required('Confirmação de senha é obrigatória'),
 });
 
+// componente principal da pagina de cadastro
 export default function SignInComponent() {
     const navigate = useNavigate();
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema)
     });
 
+    // funcao que eh usada no submit do formulario de cadastro
     const onSubmit = async (data) => {
         try {
-            // const usuariosList = JSON.parse(usuarios);
-            // const usuariosList = usuarios;
-            // console.log(usuariosList);
+
+            // verifica se ja existe algum usuario cadastrado com o email informado
             const user = usuarios.find((user) => user.email === data.email);
 
             if (user) {
@@ -41,11 +43,13 @@ export default function SignInComponent() {
                 role: 'paciente',
             };
 
+            // adiciona o novo usuario na lista de usuarios
             usuarios.push(dadosUsuario);
             console.log(usuarios);
 
             console.log('Login bem-sucedido para usuário:', dadosUsuario.email);
 
+            // aviso de cadastro realizado com sucesso e redireciona para a página de login
             alert('Cadastro realizado com sucesso! Redirecionando para a página de login.');
             setTimeout(() => { 
                 navigate('/login');
@@ -61,23 +65,20 @@ export default function SignInComponent() {
         }
     };
 
+    // formulario de cadastro usando react-hook-form e yup para validacao
     return (
         <div className={styles.signinContainer}>
             <form className={styles.formContainer} onSubmit={handleSubmit(onSubmit)}>
                 <h1>Cadastro</h1>
-                {/* <label htmlFor="name">Nome:</label> */}
                 <TextField label="Nome" variant="standard"  type="text" id="name" name="name" {...register('name', { required: 'Nome é obrigatório' })} />
                 {errors.name && <span >{errors.name.message}</span>}
                 <br />
-                {/* <label htmlFor="email">Email:</label> */}
                 <TextField label="Email" variant="standard"  type="email" id="email" name="email" {...register('email')} />
                 {errors.email && <span >{errors.email.message}</span>}
                 <br />
-                {/* <label htmlFor="password">Password:</label> */}
                 <TextField label="Password" variant="standard"  type="password" id="password" name="password" {...register('password')} />
                 {errors.password && <span >{errors.password.message}</span>}
                 <br />
-                {/* <label htmlFor="confirmPassword">Confirma Senha:</label> */}
                 <TextField label="Confirma Senha" variant="standard"  type="password" id="confirmPassword" name="confirmPassword" {...register('confirmPassword')} />
                 {errors.confirmPassword && <span >{errors.confirmPassword.message}</span>}
                 <br />

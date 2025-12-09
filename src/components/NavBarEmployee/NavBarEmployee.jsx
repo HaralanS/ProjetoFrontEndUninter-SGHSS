@@ -9,7 +9,6 @@ const logout = () => {
 
 export default function NavBarEmployee() {
     const [burger, setBurger] = useState(false)
-
     
     const toggleMenu = () => {
         setBurger(!burger)
@@ -30,10 +29,6 @@ export default function NavBarEmployee() {
                     <LinkNav to="/agendas">Agendas</LinkNav>
                     <LinkNav to="/"><span onClick={logout}>Logout</span></LinkNav>
                 </div>}
-
-
-
-
             </nav>
         </>
     )

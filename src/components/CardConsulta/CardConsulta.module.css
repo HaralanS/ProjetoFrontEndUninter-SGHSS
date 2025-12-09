@@ -12,6 +12,7 @@
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
+    /* background-color: blue; */
     justify-content: space-around;
     padding: 40px 20px;
 }
